@@ -1,6 +1,6 @@
 # sequential-hash
 
-A lexicographic ordered rolling hash
+A lexicographical ordered rolling hash
 
 ```
 npm install sequential-hash

@@ -1,7 +1,7 @@
 {
   "name": "sequential-hash",
   "version": "0.0.0",
-  "description": "WIP - nothing to see here",
+  "description": "A lexicographical ordered rolling hash",
   "main": "index.js",
   "dependencies": {
     "cuid": "^1.2.4",
