@@ -6,6 +6,8 @@ A lexicographical ordered rolling hash
 npm install sequential-hash
 ```
 
+[![build status](http://img.shields.io/travis/mafintosh/sequential-hash.svg?style=flat)](http://travis-ci.org/mafintosh/sequential-hash)
+
 ## Usage
 
 ``` js
