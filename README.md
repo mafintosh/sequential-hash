@@ -14,37 +14,32 @@ npm install sequential-hash
 var seqhash = require('sequential-hash')
 var hash = seqhash('sha256') // sha256 is the hash algorithm
 
-var top = hash.seed('some random data') // make some a new rolling hash
+var prev = null
 var words = ['mathias', 'wrote', 'this']
 
 words.forEach(function (word) {
-  top = hash.next(word, top)
-  console.log(top + ' -> ' + word)
+  prev = hash(word, prev)
+  console.log(prev + ' -> ' + word)
 })
 ```
 
 Running the above produces
 
 ```
-01!3f40acd112f2dfdeb821fdc6a268325fdabd0989c7e890a50d30cdbfb09501ec -> mathias
-02!a04a3ac9464fc64a6c028eb706692a5e869026ca6d4bf1b4f650f630abd1a0ef -> wrote
-03!a7dc56135427ba2f7ece433f1db29f30d762b05b95990661881f074774bbd90e -> this
+00!c1768bf97517f3da6948ee49b4d7078890c910a9fc07065a382184a4a3d9457a -> mathias
+01!f16200e82c592e37e0f938c12ba4b3d88aa61b1df873ab03b60932956211ec03 -> wrote
+02!34efbd1375266a04c302de321196d0a029bee922ca8044fe2cf8ca38289e3333 -> this
 ```
 
 ## API
 
 #### `hash = seqhash(algo)`
 
-Create a rolling hash based on a hash algorithm
+Create a rolling hash function based on a hash algorithm (`sha1`, `sha256`, etc)
 
-#### `hashString = hash.seed([seedData])`
+#### `hashString = hash(value, [previousHash])`
 
-Generates an initial seed value for a rolling hash.
-This value will sort lower than any subsequent hashes.
-
-#### `hashString = hash.next(value, previousHash)`
-
-Hash a value. The returned `hashString` is guaranteed to sort
+Hash a value based on a previous hash. The returned `hashString` is guaranteed to sort
 lexicographically higher than `previousHash`.
 
 ## License

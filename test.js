@@ -2,28 +2,27 @@ var tape = require('tape')
 var seqhash = require('./')('sha1')
 
 tape('consistent seed', function (t) {
-  t.notEqual(seqhash.seed(), seqhash.seed(), 'not the same seed')
-  t.same(seqhash.seed('hello'), seqhash.seed('hello'), 'same seed for same input')
-  t.notEqual(seqhash.seed('hello'), seqhash.seed('world'), 'different seed for different input')
+  t.same(seqhash('hello'), seqhash('hello'), 'same seed for same input')
+  t.notEqual(seqhash('hello'), seqhash('world'), 'different seed for different input')
   t.end()
 })
 
 tape('rolling hash', function (t) {
-  var seed = seqhash.seed('hello')
+  var seed = seqhash('hello')
 
-  t.notEqual(seqhash.next('hello', seed), seqhash.next('world', seed), 'different values different hashes')
-  t.same(seqhash.next('test', seed), seqhash.next('test', seed), 'same values same hashes')
+  t.notEqual(seqhash('hello', seed), seqhash('world', seed), 'different values different hashes')
+  t.same(seqhash('test', seed), seqhash('test', seed), 'same values same hashes')
   t.end()
 })
 
 tape('ordered', function (t) {
-  var seed = seqhash.seed('hello')
+  var seed = seqhash('hello')
   var hashes = []
   var hashes2 = []
   var top = seed
 
   for (var i = 0; i < 10; i++) {
-    top = seqhash.next('' + i, top)
+    top = seqhash('' + i, top)
     hashes.push(top)
   }
 
@@ -31,27 +30,10 @@ tape('ordered', function (t) {
 
   top = seed
   for (var j = 0; j < 10; j++) {
-    top = seqhash.next('' + j, top)
+    top = seqhash('' + j, top)
     hashes2.push(top)
   }
 
   t.same(hashes2, hashes, 'consistent')
-  t.end()
-})
-
-tape('seq', function (t) {
-  var seed = seqhash.seed('hello')
-  var hashes = []
-  var top = seed
-
-  for (var i = 0; i < 10; i++) {
-    top = seqhash.next('' + i, top)
-    hashes.push(top)
-  }
-
-  hashes.forEach(function (hash, i) {
-    t.same(seqhash.seq(hash), i + 1, 'can decode prefix')
-  })
-
   t.end()
 })

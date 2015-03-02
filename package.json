@@ -4,7 +4,6 @@
   "description": "A lexicographical ordered rolling hash",
   "main": "index.js",
   "dependencies": {
-    "cuid": "^1.2.4",
     "lexicographic-integer": "^1.1.0"
   },
   "devDependencies": {
