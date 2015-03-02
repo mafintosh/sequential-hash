@@ -1,0 +1,27 @@
+{
+  "name": "sequential-hash",
+  "version": "0.0.0",
+  "description": "WIP - nothing to see here",
+  "main": "index.js",
+  "dependencies": {
+    "cuid": "^1.2.4",
+    "lexicographic-integer": "^1.1.0"
+  },
+  "devDependencies": {
+    "standard": "^2.10.0",
+    "tape": "^3.5.0"
+  },
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/sequential-hash.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/sequential-hash/issues"
+  },
+  "homepage": "https://github.com/mafintosh/sequential-hash"
+}
